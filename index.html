@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="author" content="N. A." />
+  <meta name="description" content="N. A. — Wirtschaftsingenieurwesen · Beratung · Prozessoptimierung · Projektmanagement — Portfolio (Lehrprojekt)." />
+  <title>N. A. — Wirtschaftsingenieurwesen & Beratung (Portfolio)</title>
+
+  <!-- Fonts: Serif für Headlines, Sans für Text -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b1220;           /* dunkelblau/anthrazit */
+      --card:#0f1724;
+      --muted:#9aa4b2;
+      --white:#ffffff;
+      --gold:#c9a84b;        /* gold-akzent */
+      --teal:#2fb6b6;        /* alternative akzent */
+      --radius:18px;
+      --container:1200px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Arial; background:linear-gradient(180deg,var(--bg),#071229 120%); color:var(--white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      display:flex; justify-content:center; padding:30px 18px;
+    }
+    .wrap{width:100%; max-width:var(--container)}
+
+    /* NAV */
+    header.top{display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--teal));display:flex;align-items:center;justify-content:center;color:var(--bg);font-weight:700}
+    .brand h1{font-family:'Playfair Display', serif;font-size:20px;margin:0}
+    nav{display:flex;gap:18px}
+    nav a{color:rgba(255,255,255,0.78);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--gold)}
+
+    /* HERO */
+    .hero{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); padding:48px; border-radius:var(--radius); box-shadow:var(--shadow); display:grid; grid-template-columns:1fr 480px; gap:32px; align-items:center}
+    @media (max-width:980px){.hero{grid-template-columns:1fr; text-align:center}}
+    .hero .eyebrow{color:var(--teal); font-weight:600; letter-spacing:0.06em}
+    .hero h2{font-family:'Playfair Display', serif; font-size:42px; margin:10px 0; color:var(--white); line-height:1.05}
+    .hero p.lead{color:rgba(255,255,255,0.82); font-size:16px; margin-bottom:22px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{background:var(--gold); color:var(--bg); padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06); color:rgba(255,255,255,0.9)}
+
+    /* right hero: AI-visual placeholder */
+    .hero-visual{border-radius:14px; overflow:hidden; background:linear-gradient(135deg,#07122b 0%, #18304a 100%); padding:18px; display:flex; flex-direction:column; gap:12px; align-items:center}
+    .visual-canvas{width:100%; height:340px; border-radius:10px; background:radial-gradient(circle at 20% 20%, rgba(47,182,182,0.12), transparent 5%), linear-gradient(135deg,#07203a 0%,#0b1e2b 100%); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.9); font-weight:700}
+    .visual-caption{font-size:13px; color:var(--muted)}
+
+    /* SECTIONS */
+    .section{margin-top:36px}
+    .section-title{font-family:'Playfair Display', serif; font-size:22px; color:var(--gold); margin-bottom:18px}
+
+    /* Leistungen grid */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(1,1fr)}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:20px; border-radius:14px; box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03); cursor:pointer; transition:transform .35s, box-shadow .35s}
+    .card:hover{transform:translateY(-8px); box-shadow:0 20px 40px rgba(2,6,23,0.7)}
+    .card h3{font-size:18px; margin-bottom:8px; font-weight:700; color:var(--white)}
+    .card p{color:var(--muted); font-size:14px}
+    .card .thumb{height:140px; border-radius:10px; overflow:hidden; margin-bottom:12px; background:linear-gradient(135deg, rgba(34,56,95,0.2), rgba(28,40,60,0.2)); display:flex;align-items:center;justify-content:center}
+    .card .thumb .label{font-weight:700; color:rgba(255,255,255,0.9)}
+
+    /* overlay modal for details */
+    .overlay{position:fixed; inset:0; background:linear-gradient(rgba(2,6,23,0.6), rgba(2,6,23,0.8)); display:none; align-items:center; justify-content:center; z-index:1200}
+    .overlay.open{display:flex}
+    .modal{background:linear-gradient(180deg,#071229,#0b1e2b); width:min(1000px,96%); border-radius:14px; padding:28px; box-shadow:0 30px 80px rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.04); color:var(--white); transform:translateY(20px); opacity:0; transition:opacity .35s, transform .35s}
+    .overlay.open .modal{transform:translateY(0); opacity:1}
+    .modal .close{position:absolute; right:28px; top:28px; background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--white); padding:8px 10px; border-radius:10px; cursor:pointer}
+    .modal-grid{display:grid; grid-template-columns:1fr 360px; gap:18px}
+    @media (max-width:980px){.modal-grid{grid-template-columns:1fr}}
+
+    /* subtle icons & infographic area */
+    .infographic{background:linear-gradient(135deg, rgba(255,255,255,0.02), transparent); padding:14px; border-radius:12px}
+    .infographic svg{width:100%; height:140px}
+
+    .meta{color:var(--muted); font-size:13px; margin-bottom:12px}
+
+    /* CTA area */
+    .cta-row{display:flex; gap:12px; align-items:center; margin-top:16px}
+
+    /* Footer & disclaimer */
+    footer{margin-top:36px; color:var(--muted); font-size:13px; text-align:center}
+    .disclaimer{max-width:900px; margin:18px auto 0; color:rgba(255,255,255,0.7); font-size:13px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:12px; border-radius:10px}
+
+    /* scroll animations (hidden by default) */
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Top Nav -->
+    <header class="top">
+      <div class="brand">
+        <div class="logo">NA</div>
+        <h1 style="margin:0">N. A.</h1>
+      </div>
+      <nav>
+        <a href="#hero">Start</a>
+        <a href="#services">Leistungen</a>
+        <a href="#projects">Projekte</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div>
+        <div class="eyebrow">Wirtschaft trifft Technik</div>
+        <h2>Effizienz für die Zukunft — Prozessoptimierung & Beratung</h2>
+        <p class="lead">Ich bin N. A. — Studentin Wirtschaftsingenieurwesen. Fokus: Beratung, Prozessoptimierung, Projektmanagement und KI-gestützte Automatisierung. Diese Seite ist ein Lehrprojekt mit KI-generierten Bildern und rein fiktiven Inhalten.</p>
+
+        <div class="cta">
+          <a class="btn" href="#services">Leistungen Entdecken</a>
+          <a class="btn ghost" id="start-project">Projekt starten</a>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted);font-size:13px">Alle visuellen Bilder wurden KI-generiert (Platzhalter) — realistische, futuristische Visuals für Technik & Business.</div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-canvas">AI-GENERATED VISUAL — FUTURISTIC BUSINESS / FACTORY</div>
+        <div class="visual-caption">KI-generiertes Bild: futuristische Fabrik / Teamwork — stilvolle, realistische Darstellung</div>
+      </div>
+    </section>
+
+    <!-- Leistungen / Services -->
+    <section id="services" class="section">
+      <div class="section-title">Leistungen</div>
+      <div class="grid" id="services-grid">
+        <!-- service cards (clickable, open overlay) -->
+        <div class="card reveal" data-service="proc">
+          <div class="thumb"><div class="label">PROZESSE</div></div>
+          <h3>Prozessoptimierung</h3>
+          <p>Wertstromanalyse, Taktoptimierung und Effizienzsteigerung.</p>
+        </div>
+
+        <div class="card reveal" data-service="cost">
+          <div class="thumb"><div class="label">KOSTEN</div></div>
+          <h3>Kostenmanagement</h3>
+          <p>Optimierung der Kostenstrukturen & Investitionsplanung.</p>
+        </div>
+
+        <div class="card reveal" data-service="digital">
+          <div class="thumb"><div class="label">DIGITAL</div></div>
+          <h3>Digitalisierung & KI</h3>
+          <p>Automatisierung, Datenpipelines und KI-gestützte Analyse.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projekte (visuals) -->
+    <section id="projects" class="section">
+      <div class="section-title">Projekte</div>
+      <div class="grid">
+        <div class="card reveal" data-service="proj1">
+          <div class="thumb"><div class="label">SMART FACTORY</div></div>
+          <h3>Smart Factory Prototype</h3>
+          <p>Konzept & Simulation zur Echtzeit-Überwachung von Linien.</p>
+        </div>
+        <div class="card reveal" data-service="proj2">
+          <div class="thumb"><div class="label">ANALYTICS</div></div>
+          <h3>Analytics & Reporting</h3>
+          <p>Dashboards zur Unterstützung von Entscheidungsprozessen.</p>
+        </div>
+        <div class="card reveal" data-service="proj3">
+          <div class="thumb"><div class="label">LEAN</div></div>
+          <h3>Lean Transformations-Workshop</h3>
+          <p>Workshops, Schulungen und praktische Implementierung.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Kontakt -->
+    <section id="contact" class="section">
+      <div class="section-title">Kontakt</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:center">
+        <a class="btn" href="#" id="cta-start">Projekt starten</a>
+        <a class="btn ghost" href="#" id="cta-more">Mehr erfahren</a>
+      </div>
+    </section>
+
+    <div class="disclaimer">Hinweis: Diese Website ist ein **Lehrprojekt**. Alle Bilder sind KI-generierte Platzhalter; alle Inhalte sind fiktiv — die Seite dient ausschließlich Demonstrationszwecken für Unterricht und Design. Name gekürzt: <strong>N. A.</strong></div>
+
+    <footer>© <span id="year"></span> N. A. — Portfolio (Lehrprojekt)</footer>
+  </div>
+
+  <!-- Overlay Modal (reused for cards) -->
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" id="closeOverlay">Schließen ✕</button>
+      <div class="modal-grid">
+        <div>
+          <div class="meta" id="modalMeta">Leistung — Kurzinfo</div>
+          <h2 id="modalTitle">Titel</h2>
+          <p id="modalText">Detaillierte Beschreibung erscheint hier — inklusive Icons, Infografik und optional animierter Übergänge.</p>
+
+          <div class="cta-row">
+            <a class="btn" id="modalPrimary">Projekt starten</a>
+            <a class="btn ghost" id="modalSecondary">Mehr Ressourcen</a>
+          </div>
+        </div>
+
+        <aside>
+          <div class="infographic" id="modalVisual">
+            <!-- simple animated svg infographic placeholder -->
+            <svg viewBox="0 0 400 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="transparent" />
+              <g transform="translate(12,12)">
+                <rect x="0" y="80" width="60" height="28" rx="6" fill="#12283a" />
+                <rect x="80" y="50" width="60" height="58" rx="6" fill="#0b3b3b" />
+                <rect x="160" y="20" width="60" height="88" rx="6" fill="#11304a" />
+                <rect x="240" y="70" width="60" height="38" rx="6" fill="#0d2a2a" />
+                <g>
+                  <circle cx="340" cy="30" r="26" fill="#12323a" />
+                  <text x="340" y="36" font-size="12" text-anchor="middle" fill="#fff">AI</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">Visual: AI-generierte Illustration (Platzhalter)</div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    reveals.forEach(r=>io.observe(r));
+
+    // Overlay logic
+    const overlay = document.getElementById('overlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalPrimary = document.getElementById('modalPrimary');
+
+    const services = {
+      proc: {
+        title: 'Prozessoptimierung — Details',
+        meta: 'Leistung • Prozessanalyse',
+        text: 'Analyse von Material- und Informationsflüssen, Wertstromanalyse, Engpassanalyse und Gestaltung schlanker Abläufe. Visuals: KI-generierte Fabrikansichten, Infografiken zur Durchlaufzeit.'
+      },
+      cost: {
+        title: 'Kostenmanagement — Details',
+        meta: 'Leistung • Kosten & Investitionen',
+        text: 'Kostensenkungsmaßnahmen durch Prozessverbesserungen, TCO-Analysen und Budgetsteuerung. Enthält Szenario-Visualisierungen und KPIs.'
+      },
+      digital: {
+        title: 'Digitalisierung & KI — Details',
+        meta: 'Leistung • Automatisierung',
+        text: 'Architektur von Datenpipelines, Predictive Maintenance, ML-Modelle und Dashboards. Fokus auf skalierbare, datengesteuerte Lösungen.'
+      },
+      proj1: { title: 'Smart Factory Prototype', meta:'Projekt • Smart Factory', text:'Konzept, Simulation und Prototyp für eine vernetzte Fertigungslinie mit Anbindung an Cloud & Monitoring.' },
+      proj2: { title: 'Analytics & Reporting', meta:'Projekt • Datenvisualisierung', text:'Entwicklung von Dashboards zur Entscheidungsunterstützung inklusive KPI-Tracking.' },
+      proj3: { title: 'Lean Transformation', meta:'Projekt • Change', text:'Durchführung von Workshops, Implementierung von 5S & KVP, begleitet durch digitale Tools.' }
+    };
+
+    document.querySelectorAll('.card').forEach(card => card.addEventListener('click', e => {
+      const key = card.getAttribute('data-service');
+      if(!key || !services[key]) return;
+      const s = services[key];
+      modalTitle.textContent = s.title; modalText.textContent = s.text; modalMeta.textContent = s.meta; modalPrimary.textContent = 'Projekt starten';
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+    }));
+
+    document.getElementById('closeOverlay').addEventListener('click', ()=>{ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); });
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); } });
+
+    // CTA behaviors
+    document.getElementById('start-project').addEventListener('click', ()=>{ alert('Starter: Diese Seite ist ein Lehrprojekt; Formular nicht aktiv.'); });
+    document.getElementById('cta-start').addEventListener('click', ()=>{ alert('Starter: Diese Seite ist ein Lehrprojekt; Formular nicht aktiv.'); });
+    document.getElementById('cta-more').addEventListener('click', ()=>{ document.location.hash = '#projects'; });
+
+    // Accessibility: close modal with Escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') overlay.classList.remove('open'); });
+
+  </script>
+</body>
+</html>
